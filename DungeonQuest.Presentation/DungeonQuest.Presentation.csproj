@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DungeonQuest.Domain\DungeonQuest.Domain.csproj">
+      <Project>{aee836b7-3f16-4bda-a494-70b2da9457e1}</Project>
+      <Name>DungeonQuest.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
