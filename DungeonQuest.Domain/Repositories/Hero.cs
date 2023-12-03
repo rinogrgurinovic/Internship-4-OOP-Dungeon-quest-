@@ -11,13 +11,13 @@ namespace DungeonQuest.Domain.Repositories
         public Hero(string name)
         {
             Name = name;
-            HealthPoints = 10;
+            HealthPoints = 10d;
             Experience = 0;
             Damage = 2;
             Level = 1;
         }
         public string Name { get; set; }
-        public int HealthPoints { get; set; }
+        public double HealthPoints { get; set; }
         public int Experience { get; set;}
         public int Damage { get; set; }
         public int Level { get; set; }
