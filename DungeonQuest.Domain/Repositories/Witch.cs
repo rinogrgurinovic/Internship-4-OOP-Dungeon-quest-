@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace DungeonQuest.Domain.Repositories
 {
-    internal class Witch : Monster
+    public class Witch : Monster
     {
-        public Witch(int healthPoints, int damage) : base(healthPoints, damage)
+        public Witch(/*int healthPoints, int damage*/)/* : base(healthPoints, damage)*/
         {
-            
+            HealthPoints = 25;
+            Damage = 5;
         }
     }
 }

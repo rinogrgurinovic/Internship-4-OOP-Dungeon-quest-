@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DungeonQuest.Domain.Repositories
 {
-    internal class Monster
+    public class Monster
     {
-        public Monster(int healthPoints, int damage)
-        {
+        public Monster(/*int healthPoints, int damage*/)
+        {/*
             HealthPoints = healthPoints;
-            Damage = damage;
+            Damage = damage;*/
         }
         public int HealthPoints { get; set; }
         public int Damage { get; set; }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace DungeonQuest.Domain.Repositories
 {
-    internal class Marksman : Hero
+    public class Marksman : Hero
     {
-        public Marksman(string name, int healthPoints, int experience, int damage, int criticalChance, int stunChance) : base(name, healthPoints, experience, damage)
+        public Marksman(string name) : base(name)
         {
-            CriticalChance = criticalChance;
-            StunChance = stunChance;
+            CriticalChance = 0.05;
+            StunChance = 0.1;
         }
-        public int CriticalChance { get; set; }
-        public int StunChance { get; set; }
+        public double CriticalChance { get; set; }
+        public double StunChance { get; set; }
     }
 }

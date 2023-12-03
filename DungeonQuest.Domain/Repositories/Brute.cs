@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace DungeonQuest.Domain.Repositories
 {
-    internal class Brute : Monster
+    public class Brute : Monster
     {
-        public Brute(int healthPoints, int damage, int trueDamage) : base(healthPoints, damage)
+        public Brute(/*int healthPoints, int damage, int trueDamage*/)/* : base(healthPoints, damage)*/
         {
-            TrueDamage = trueDamage;
+            HealthPoints = 15;
+            Damage = 3;
+            TrueDamage = 0.2;
         }
-        public int TrueDamage { get; set; }
+        public double TrueDamage { get; set; }
     }
 }

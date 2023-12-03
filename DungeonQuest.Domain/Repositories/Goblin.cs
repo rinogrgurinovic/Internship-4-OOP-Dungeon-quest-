@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace DungeonQuest.Domain.Repositories
 {
-    internal class Goblin : Monster
+    public class Goblin : Monster
     {
-        public Goblin(int healthPoints, int damage) : base(healthPoints, damage)
+        public Goblin(/*int healthPoints, int damage*/)/* : base(healthPoints, damage)*/
         {
-            
+            HealthPoints = 5;
+            Damage = 1;
         }
     }
 }

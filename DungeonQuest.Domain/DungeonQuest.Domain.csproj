@@ -43,8 +43,14 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Brute.cs" />
+    <Compile Include="Repositories\Enchater.cs" />
     <Compile Include="Repositories\Gladiator.cs" />
+    <Compile Include="Repositories\Goblin.cs" />
     <Compile Include="Repositories\Hero.cs" />
+    <Compile Include="Repositories\Marksman.cs" />
+    <Compile Include="Repositories\Monster.cs" />
+    <Compile Include="Repositories\Witch.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DungeonQuest.Data\DungeonQuest.Data.csproj">

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DungeonQuest.Domain.Repositories
 {
-    internal class Enchater : Hero
+    public class Enchater : Hero
     {
-        public Enchater(string name, int healthPoints, int experience, int damage, int mana) : base(name, healthPoints, experience, damage)
+        public Enchater(string name) : base(name)
         {
-            Mana = mana;
+            Mana = 100;
         }
         public int Mana { get; set; }
     }
