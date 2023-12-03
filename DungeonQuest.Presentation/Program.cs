@@ -13,20 +13,21 @@ namespace DungeonQuest.Presentation
         static void Main(string[] args)
         {
             Console.WriteLine("Upisite ime vaseg heroja:");
-            string name = StringInput();
-            var hero = new Hero(name);
+            var name = StringInput();
+            var hero = ChoosingHeroType(name);
             
             bool exit = false;
             do
             {
                 var monsters = new List<Monster>();
-                int i = 0;
+                var i = 0;
                 while (i < 10)
                 {
                     monsters.Add(MonsterGenerator());
                     i++;
                 }
                 
+
             } while (!exit);
             
         }
@@ -37,13 +38,53 @@ namespace DungeonQuest.Presentation
             do { input = Console.ReadLine(); } while (input.Trim() == "");
             return input;
         }
+
+        static public int IntInput()
+        {
+            int input;
+            var inputVerification = true;
+            do
+            {
+                if (!inputVerification) { Console.WriteLine("Krivi unos, pokusajte ponovno:"); }
+                inputVerification = int.TryParse(Console.ReadLine(), out input);
+            } while (!inputVerification);
+            return input;
+        }
         
         static public Monster MonsterGenerator()
         {
-            int randomNumberGenerator = new Random().Next(1,101);
+            var randomNumberGenerator = new Random().Next(1,101);
             if (randomNumberGenerator <= 60) { return new Goblin(); }
             else if (randomNumberGenerator <= 90) { return new Brute(); }
             else { return new Witch(); }
+        }
+
+        static public Hero ChoosingHeroType(string name)
+        {
+            ChoosingHeroTypeMenu();
+            do
+            {
+                switch (IntInput())
+                {
+                    case 1:
+                        return new Gladiator(name);
+                    case 2:
+                        return new Marksman(name);
+                    case 3:
+                        return new Enchater(name);
+                    default:
+                        Console.WriteLine("Krivi unos, pokusajte ponovno:");
+                        break;
+                }
+            } while (true);
+        }
+
+        static public void ChoosingHeroTypeMenu()
+        {
+            Console.WriteLine("Odaberite tip vaseg heroja:");
+            Console.WriteLine("1 - Gladiator");
+            Console.WriteLine("2 - Marksman");
+            Console.WriteLine("3 - Enchanter");
         }
     }
 }
