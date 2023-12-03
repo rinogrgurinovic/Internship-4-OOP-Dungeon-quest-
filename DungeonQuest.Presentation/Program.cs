@@ -32,6 +32,7 @@ namespace DungeonQuest.Presentation
                 while (i < 10)
                 {
                     Console.Clear();
+                    Console.WriteLine($"Borite se protiv - {monsters[i].Name}");
                     hero.HealthPoints = Battle(hero, monsters[i]);
                     if (hero.HealthPoints <= 0)
                     {

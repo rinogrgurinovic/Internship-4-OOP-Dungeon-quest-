@@ -10,8 +10,9 @@ namespace DungeonQuest.Domain.Repositories
     {
         public Witch(/*int healthPoints, int damage*/)/* : base(healthPoints, damage)*/
         {
-            HealthPoints = 25;
-            Damage = 5;
+            Name = "Witch";
+            HealthPoints = 15;
+            Damage = 8;
         }
     }
 }

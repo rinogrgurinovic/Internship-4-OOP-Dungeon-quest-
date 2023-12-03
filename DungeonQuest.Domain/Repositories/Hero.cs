@@ -11,9 +11,7 @@ namespace DungeonQuest.Domain.Repositories
         public Hero(string name)
         {
             Name = name;
-            HealthPoints = 10d;
             Experience = 0;
-            Damage = 2;
             Level = 1;
         }
         public string Name { get; set; }

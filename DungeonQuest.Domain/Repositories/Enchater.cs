@@ -10,6 +10,8 @@ namespace DungeonQuest.Domain.Repositories
     {
         public Enchater(string name) : base(name)
         {
+            HealthPoints = 10;
+            Damage = 10;
             Mana = 100;
         }
         public int Mana { get; set; }

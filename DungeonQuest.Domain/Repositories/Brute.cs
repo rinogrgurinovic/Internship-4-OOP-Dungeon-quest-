@@ -10,8 +10,9 @@ namespace DungeonQuest.Domain.Repositories
     {
         public Brute(/*int healthPoints, int damage, int trueDamage*/)/* : base(healthPoints, damage)*/
         {
-            HealthPoints = 15;
-            Damage = 3;
+            Name = "Brute";
+            HealthPoints = 20;
+            Damage = 5;
             TrueDamage = 0.2;
         }
         public double TrueDamage { get; set; }

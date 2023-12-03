@@ -10,6 +10,7 @@ namespace DungeonQuest.Domain.Repositories
     {
         public Goblin(/*int healthPoints, int damage*/)/* : base(healthPoints, damage)*/
         {
+            Name = "Goblin";
             HealthPoints = 5;
             Damage = 1;
         }

@@ -8,6 +8,10 @@ namespace DungeonQuest.Domain.Repositories
 {
     public class Gladiator : Hero
     {
-        public Gladiator(string name) : base(name) { }
+        public Gladiator(string name) : base(name)
+        {
+            HealthPoints = 20;
+            Damage = 2;
+        }
     }
 }

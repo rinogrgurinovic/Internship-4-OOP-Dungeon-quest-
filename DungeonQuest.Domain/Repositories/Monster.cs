@@ -13,6 +13,7 @@ namespace DungeonQuest.Domain.Repositories
             HealthPoints = healthPoints;
             Damage = damage;*/
         }
+        public string Name { get; set; }
         public int HealthPoints { get; set; }
         public int Damage { get; set; }
     }
