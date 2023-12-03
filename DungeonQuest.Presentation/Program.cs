@@ -19,8 +19,14 @@ namespace DungeonQuest.Presentation
             bool exit = false;
             do
             {
+                var monsters = new List<Monster>();
+                int i = 0;
+                while (i < 10)
+                {
+                    monsters.Add(MonsterGenerator());
+                    i++;
+                }
                 
-
             } while (!exit);
             
         }
@@ -30,6 +36,14 @@ namespace DungeonQuest.Presentation
             string input;
             do { input = Console.ReadLine(); } while (input.Trim() == "");
             return input;
+        }
+        
+        static public Monster MonsterGenerator()
+        {
+            int randomNumberGenerator = new Random().Next(1,101);
+            if (randomNumberGenerator <= 60) { return new Goblin(); }
+            else if (randomNumberGenerator <= 90) { return new Brute(); }
+            else { return new Witch(); }
         }
     }
 }
