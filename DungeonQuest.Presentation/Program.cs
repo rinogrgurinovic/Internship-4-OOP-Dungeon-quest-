@@ -32,7 +32,13 @@ namespace DungeonQuest.Presentation
                 while (i < 10)
                 {
                     Console.Clear();
-                    Battle(hero, monsters[i]);
+                    hero.HealthPoints = Battle(hero, monsters[i]);
+                    if (hero.HealthPoints <= 0)
+                    {
+                        exit = GameOver();
+                        break;
+                    }
+                        
                     i++;
                 }
             } while (!exit);
@@ -93,24 +99,27 @@ namespace DungeonQuest.Presentation
             else { return new Witch(); }
         }
 
-        static public bool Battle(Hero hero, Monster monster)
+        static public double Battle(Hero hero, Monster monster)
         {
             do
             {
                 var heroMove = HeroMoves();
                 var monsterMove = (BattleMove)new Random().Next(0, 3);
+
                 if (heroMove == monsterMove)
                 {
                     Console.WriteLine("Cudoviste je izabralo isto sto i vi, nista se ne dogodi. Pritisnite tipku za nastavak");
                     Console.ReadKey();
                     continue;
                 }
-                Round(heroMove, monsterMove);
-                
+                else if (DetermineRoundWinner(heroMove, monsterMove)) { monster.HealthPoints -= hero.Damage; }
+                else { hero.HealthPoints -= monster.Damage; }
+
+                if (monster.HealthPoints <= 0 || hero.HealthPoints <= 0) { return hero.HealthPoints; }
             } while (true);
         }
 
-        static public bool Round(BattleMove heroMove, BattleMove monsterMove)
+        static public bool DetermineRoundWinner(BattleMove heroMove, BattleMove monsterMove)
         {
             if ((heroMove == BattleMove.Direct && monsterMove == BattleMove.Side) ||
                 (heroMove == BattleMove.Side && monsterMove == BattleMove.Counter) ||
@@ -161,6 +170,25 @@ namespace DungeonQuest.Presentation
             Direct,
             Side,
             Counter
+        }
+
+        static public bool GameOver()
+        {
+            Console.WriteLine("Umrli ste, zelite li pokusati ponovno?");
+            string input = StringInput();
+            do
+            {
+                switch (input.ToLower())
+                {
+                    case "da":
+                        return false;
+                    case "ne":
+                        return true;
+                    default:
+                        Console.WriteLine("Krivi unos, pokusajte ponovno:");
+                        break;
+                }
+            } while (true);
         }
     }
 }
