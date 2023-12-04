@@ -77,6 +77,13 @@ namespace DungeonQuest.Presentation
                         hero.HealthPoints = hero.HealthPointsMax;
                     Console.WriteLine();
 
+                    if (hero.Type == Hero.HeroType.Enchanter)
+                    {
+                        Console.WriteLine("Obnovljena vam je mana");
+                        hero.Mana = hero.ManaMax;
+                        Console.WriteLine();
+                    }
+
                     Console.WriteLine("Pritisnite tipku za nastavak");
                     Console.ReadKey();
 
