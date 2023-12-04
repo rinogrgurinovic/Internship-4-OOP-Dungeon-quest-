@@ -19,10 +19,7 @@ namespace DungeonQuest.Presentation
                 Console.WriteLine("Upisite ime vaseg heroja:");
                 var name = StringInput();
                 var hero = ChoosingHeroType(name);
-                /*
-                Console.WriteLine(hero.GetType());
-                Console.ReadKey();
-                */
+                
                 var monsters = new List<Monster>();
                 var i = 0;
                 while (i < 10)
@@ -37,11 +34,21 @@ namespace DungeonQuest.Presentation
                     Console.Clear();
                     hero.HealthPoints = Battle(hero, monsters[i], i + 1);
 
-                    if (hero.HealthPoints <= 0)
+                    if (hero.HealthPoints <= 0 && hero.Revive)
+                    {
+                        hero.Revive = false;
+                        Console.WriteLine("Umrli ste, ali ste se vatili iz mrtvih");
+                        hero.HealthPoints = hero.HealthPointsMax;
+                        hero.Mana = hero.ManaMax;
+                        hero.HealthPoints = Battle(hero, monsters[i], i + 1);
+                    }
+
+                    if (hero.HealthPoints <= 0 && !hero.Revive)
                     {
                         exit = GameOver();
                         break;
                     }
+                        
 
                     Console.Clear();
                     Console.WriteLine($"Pobijedili ste {i + 1}. bitku");
@@ -58,7 +65,7 @@ namespace DungeonQuest.Presentation
                         Console.WriteLine($"Level up-ali ste se, vas novi level je {hero.Level}");
                         hero.HealthPointsMax += 5;
                         hero.Damage += 2;
-                        hero.Mana += 5;
+                        hero.ManaMax += 5;
                         hero.CriticalChance += 5;
                         hero.StunChance += 5;
                         Console.WriteLine();

@@ -21,6 +21,7 @@ namespace DungeonQuest.Domain.Repositories
         public int Damage { get; set; }
         public int Level { get; set; }
         public int Mana { get; set; }
+        public int ManaMax { get; set; }
         public double CriticalChance { get; set; }
         public double StunChance { get; set; }
         public bool Revive { get; set; }

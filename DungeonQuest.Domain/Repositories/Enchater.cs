@@ -15,6 +15,7 @@ namespace DungeonQuest.Domain.Repositories
             HealthPointsMax = 10;
             Damage = 10;
             Mana = 20;
+            ManaMax = 20;
             Revive = true;
         }
     }
