@@ -8,11 +8,13 @@ namespace DungeonQuest.Domain.Repositories
 {
     public class Goblin : Monster
     {
-        public Goblin(/*int healthPoints, int damage*/)/* : base(healthPoints, damage)*/
+        public Goblin()
         {
             Name = "Goblin";
             HealthPoints = 5;
+            HealthPointsMax = 5;
             Damage = 1;
+            Experience = 25;
         }
     }
 }

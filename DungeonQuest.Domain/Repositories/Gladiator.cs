@@ -11,6 +11,7 @@ namespace DungeonQuest.Domain.Repositories
         public Gladiator(string name) : base(name)
         {
             HealthPoints = 20;
+            HealthPointsMax = 20;
             Damage = 2;
         }
     }

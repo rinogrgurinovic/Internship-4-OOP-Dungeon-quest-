@@ -11,6 +11,7 @@ namespace DungeonQuest.Domain.Repositories
         public Marksman(string name) : base(name)
         {
             HealthPoints = 15;
+            HealthPointsMax = 15;
             Damage = 5;
             CriticalChance = 0.05;
             StunChance = 0.1;

@@ -32,14 +32,38 @@ namespace DungeonQuest.Presentation
                 while (i < 10)
                 {
                     Console.Clear();
-                    Console.WriteLine($"Borite se protiv - {monsters[i].Name}");
-                    hero.HealthPoints = Battle(hero, monsters[i]);
+                    hero.HealthPoints = Battle(hero, monsters[i], i + 1);
+
                     if (hero.HealthPoints <= 0)
                     {
                         exit = GameOver();
                         break;
                     }
-                        
+
+                    Console.Clear();
+                    Console.WriteLine($"Pobijedili ste {i + 1}. bitku");
+                    Console.WriteLine();
+
+                    Console.WriteLine($"Osvojili ste {monsters[i].Experience} XP-a");
+                    hero.Experience += monsters[i].Experience;
+                    Console.WriteLine();
+
+                    if (hero.Experience >= 100)
+                    {
+                        hero.Level++;
+                        hero.Experience -= 100;
+                        Console.WriteLine($"Level up-ali ste se, vas novi level je {hero.Level}");
+
+                        Console.WriteLine();
+                    }
+
+                    Console.WriteLine($"Vratilo vam se {0.25 * hero.HealthPointsMax} HP-a");
+                    hero.HealthPoints *= 1.25;
+                    Console.WriteLine();
+
+                    Console.WriteLine("Pritisnite tipku za nastavak");
+                    Console.ReadKey();
+
                     i++;
                 }
             } while (!exit);
@@ -100,10 +124,17 @@ namespace DungeonQuest.Presentation
             else { return new Witch(); }
         }
 
-        static public double Battle(Hero hero, Monster monster)
+        static public double Battle(Hero hero, Monster monster, int monsterNumber)
         {
             do
             {
+                Console.WriteLine($"Borite se protiv - {monster.Name} ({monsterNumber}/10)");
+
+                DisplayHeroStats(hero);
+                Console.WriteLine();
+                DisplayMonsterStats(monster);
+                Console.WriteLine();
+
                 var heroMove = HeroMoves();
                 var monsterMove = (BattleMove)new Random().Next(0, 3);
 
@@ -111,12 +142,14 @@ namespace DungeonQuest.Presentation
                 {
                     Console.WriteLine("Cudoviste je izabralo isto sto i vi, nista se ne dogodi. Pritisnite tipku za nastavak");
                     Console.ReadKey();
+                    Console.Clear();
                     continue;
                 }
                 else if (DetermineRoundWinner(heroMove, monsterMove)) { monster.HealthPoints -= hero.Damage; }
                 else { hero.HealthPoints -= monster.Damage; }
 
                 if (monster.HealthPoints <= 0 || hero.HealthPoints <= 0) { return hero.HealthPoints; }
+                Console.Clear();
             } while (true);
         }
 
@@ -126,13 +159,13 @@ namespace DungeonQuest.Presentation
                 (heroMove == BattleMove.Side && monsterMove == BattleMove.Counter) ||
                 (heroMove == BattleMove.Counter && monsterMove == BattleMove.Direct))
             {
-                Console.WriteLine("Vi ste dobili rundu. Pritisnite tipku za nastavak");
+                Console.WriteLine("Vi ste pobijedili rundu. Pritisnite tipku za nastavak");
                 Console.ReadKey();
                 return true;
             }
             else
             {
-                Console.WriteLine("Cudoviste je dobilo rundu. Pritisnite tipku za nastavak");
+                Console.WriteLine("Cudoviste je pobijedilo rundu. Pritisnite tipku za nastavak");
                 Console.ReadKey();
                 return false;
             }
@@ -171,6 +204,22 @@ namespace DungeonQuest.Presentation
             Direct,
             Side,
             Counter
+        }
+
+        static public void DisplayHeroStats(Hero hero)
+        {
+            Console.WriteLine(hero.Name);
+            Console.WriteLine($"HP - {hero.HealthPoints}/{hero.HealthPointsMax}");
+            Console.WriteLine($"Damage - {hero.Damage}");
+            Console.WriteLine($"Level - {hero.Level}");
+            Console.WriteLine($"XP - {hero.Experience}/100");
+        }
+
+        static public void DisplayMonsterStats(Monster monster)
+        {
+            Console.WriteLine(monster.Name);
+            Console.WriteLine($"HP - {monster.HealthPoints}/{monster.HealthPointsMax}");
+            Console.WriteLine($"Damage - {monster.Damage}");
         }
 
         static public bool GameOver()
