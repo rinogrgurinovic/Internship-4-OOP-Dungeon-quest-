@@ -14,9 +14,8 @@ namespace DungeonQuest.Domain.Repositories
             HealthPoints = 20;
             HealthPointsMax = 20;
             Damage = 5;
-            TrueDamage = 0.2;
+            TrueDamage = 80;
             Experience = 50;
         }
-        public double TrueDamage { get; set; }
     }
 }

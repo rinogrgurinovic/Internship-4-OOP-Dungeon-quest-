@@ -10,11 +10,12 @@ namespace DungeonQuest.Domain.Repositories
     {
         public Enchater(string name) : base(name)
         {
+            Type = HeroType.Enchanter;
             HealthPoints = 10;
             HealthPointsMax = 10;
             Damage = 10;
-            Mana = 100;
+            Mana = 20;
+            Revive = true;
         }
-        public int Mana { get; set; }
     }
 }

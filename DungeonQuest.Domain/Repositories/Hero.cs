@@ -20,5 +20,16 @@ namespace DungeonQuest.Domain.Repositories
         public int Experience { get; set;}
         public int Damage { get; set; }
         public int Level { get; set; }
+        public int Mana { get; set; }
+        public double CriticalChance { get; set; }
+        public double StunChance { get; set; }
+        public bool Revive { get; set; }
+        public HeroType Type { get; set; }
+        public enum HeroType
+        {
+            Gladiator,
+            Marksman,
+            Enchanter
+        }
     }
 }

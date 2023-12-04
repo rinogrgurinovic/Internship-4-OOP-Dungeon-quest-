@@ -14,5 +14,7 @@ namespace DungeonQuest.Domain.Repositories
         public int HealthPointsMax { get; set; }
         public int Damage { get; set; }
         public int Experience { get; set; }
+        public double TrueDamage { get; set; }
+
     }
 }

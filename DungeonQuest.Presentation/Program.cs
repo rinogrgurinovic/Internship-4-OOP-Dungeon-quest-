@@ -19,7 +19,10 @@ namespace DungeonQuest.Presentation
                 Console.WriteLine("Upisite ime vaseg heroja:");
                 var name = StringInput();
                 var hero = ChoosingHeroType(name);
-
+                /*
+                Console.WriteLine(hero.GetType());
+                Console.ReadKey();
+                */
                 var monsters = new List<Monster>();
                 var i = 0;
                 while (i < 10)
@@ -55,6 +58,9 @@ namespace DungeonQuest.Presentation
                         Console.WriteLine($"Level up-ali ste se, vas novi level je {hero.Level}");
                         hero.HealthPointsMax += 5;
                         hero.Damage += 2;
+                        hero.Mana += 5;
+                        hero.CriticalChance += 5;
+                        hero.StunChance += 5;
                         Console.WriteLine();
                     }
 
@@ -163,7 +169,30 @@ namespace DungeonQuest.Presentation
                     Console.Clear();
                     continue;
                 }
-                else if (DetermineRoundWinner(heroMove, monsterMove)) { monster.HealthPoints -= hero.Damage; }
+                else if (DetermineRoundWinner(heroMove, monsterMove)) { 
+                    if (hero.Type == Hero.HeroType.Marksman)
+                    {
+                        var randomNumberGenerator = new Random().Next(1, 101);
+                        if (randomNumberGenerator <= hero.CriticalChance)
+                            monster.HealthPoints -= hero.Damage;
+                    }
+                    monster.HealthPoints -= hero.Damage;
+                }
+                else if (monster.Name == "Brute")
+                {
+                    var randomNumberGenerator = new Random().Next(1, 101);
+                    if (randomNumberGenerator <= 33)
+                        hero.HealthPoints *= monster.TrueDamage;
+                }
+                else if (monster.Name == "Witch")
+                {
+                    var randomNumberGenerator = new Random().Next(1, 101);
+                    if (randomNumberGenerator <= 15)
+                    {
+                        var randomHealthPoints = new Random().Next(1, 101);
+                        hero.HealthPointsMax = randomHealthPoints;
+                    }
+                }
                 else { hero.HealthPoints -= monster.Damage; }
 
                 if (monster.HealthPoints <= 0 || hero.HealthPoints <= 0) { return hero.HealthPoints; }
@@ -231,6 +260,10 @@ namespace DungeonQuest.Presentation
             Console.WriteLine($"Damage - {hero.Damage}");
             Console.WriteLine($"Level - {hero.Level}");
             Console.WriteLine($"XP - {hero.Experience}/100");
+            if (hero.Type == Hero.HeroType.Enchanter)
+            {
+                Console.WriteLine($"Mana - {hero.Mana}");
+            }
         }
 
         static public void DisplayMonsterStats(Monster monster)

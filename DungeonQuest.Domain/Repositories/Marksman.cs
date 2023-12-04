@@ -10,13 +10,12 @@ namespace DungeonQuest.Domain.Repositories
     {
         public Marksman(string name) : base(name)
         {
+            Type = HeroType.Marksman;
             HealthPoints = 15;
             HealthPointsMax = 15;
             Damage = 5;
-            CriticalChance = 0.05;
-            StunChance = 0.1;
+            CriticalChance = 5;
+            StunChance = 10;
         }
-        public double CriticalChance { get; set; }
-        public double StunChance { get; set; }
     }
 }
