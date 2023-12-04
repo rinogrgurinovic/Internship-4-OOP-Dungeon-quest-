@@ -13,7 +13,7 @@ namespace DungeonQuest.Presentation
     {
         static void Main(string[] args)
         {
-            bool exit = false;
+            bool exit;
             do
             {
                 Console.WriteLine("Upisite ime vaseg heroja:");
@@ -29,7 +29,7 @@ namespace DungeonQuest.Presentation
                 }
                 
                 i = 0;
-                while (i < 10)
+                while (true)
                 {
                     Console.Clear();
                     hero.HealthPoints = Battle(hero, monsters[i], i + 1);
@@ -53,18 +53,36 @@ namespace DungeonQuest.Presentation
                         hero.Level++;
                         hero.Experience -= 100;
                         Console.WriteLine($"Level up-ali ste se, vas novi level je {hero.Level}");
-
+                        hero.HealthPointsMax += 5;
+                        hero.Damage += 2;
                         Console.WriteLine();
                     }
 
                     Console.WriteLine($"Vratilo vam se {0.25 * hero.HealthPointsMax} HP-a");
                     hero.HealthPoints *= 1.25;
+                    if (hero.HealthPoints > hero.HealthPointsMax)
+                        hero.HealthPoints = hero.HealthPointsMax;
                     Console.WriteLine();
 
                     Console.WriteLine("Pritisnite tipku za nastavak");
                     Console.ReadKey();
 
+                    if (hero.HealthPoints != hero.HealthPointsMax)
+                        if (UseXPToHeal())
+                        {
+                            hero.Experience /= 2;
+                            hero.HealthPoints = hero.HealthPointsMax;
+                            Console.WriteLine("Obnovljen HP. Pritisnite tipku za nastavak");
+                            Console.ReadKey();
+                        }
+
                     i++;
+
+                    if (i == 9) 
+                    { 
+                        exit = GameWin(hero);
+                        break;
+                    }
                 }
             } while (!exit);
             
@@ -225,7 +243,7 @@ namespace DungeonQuest.Presentation
         static public bool GameOver()
         {
             Console.WriteLine("Umrli ste, zelite li pokusati ponovno?");
-            string input = StringInput();
+            var input = StringInput();
             do
             {
                 switch (input.ToLower())
@@ -234,6 +252,37 @@ namespace DungeonQuest.Presentation
                         return false;
                     case "ne":
                         return true;
+                    default:
+                        Console.WriteLine("Krivi unos, pokusajte ponovno:");
+                        break;
+                }
+            } while (true);
+        }
+
+        static public bool GameWin(Hero hero)
+        {
+            Console.WriteLine("Pobijedili ste!");
+            Console.WriteLine();
+            Console.WriteLine("Vasi konacni statovi:");
+            DisplayHeroStats(hero);
+            Console.WriteLine("Pritisnite tipku za kraj");
+            Console.ReadKey();
+            return true;
+        }
+
+        static public bool UseXPToHeal()
+        {
+            Console.Clear();
+            Console.WriteLine("Zelite li potrositi pola XP-a da obnovite sav HP:");
+            var input = StringInput();
+            do
+            {
+                switch (input.ToLower())
+                {
+                    case "da":
+                        return true;
+                    case "ne":
+                        return false;
                     default:
                         Console.WriteLine("Krivi unos, pokusajte ponovno:");
                         break;

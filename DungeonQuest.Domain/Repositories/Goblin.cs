@@ -14,7 +14,7 @@ namespace DungeonQuest.Domain.Repositories
             HealthPoints = 5;
             HealthPointsMax = 5;
             Damage = 1;
-            Experience = 25;
+            Experience = 20;
         }
     }
 }
